@@ -1,0 +1,12 @@
+{
+    "name":"Lista",
+    "short-name":"milista",
+    "start_url":".",
+    "display":"standalone",
+    "description":"Mi nueva PWA",
+    "icons":[{
+        "src":"icono2.png",
+        "sizes":"144x144",
+        "type":"image/png"
+    }]
+}

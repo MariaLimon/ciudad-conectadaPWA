@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+
+<html class="light" lang="es"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Detalles del Reporte</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;500;600;700;800;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet"/>
+<script>
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            "primary": "#005A9C",
+            "background-light": "#F0F2F5",
+            "background-dark": "#101922",
+          },
+          fontFamily: {
+            "display": ["Public Sans", "sans-serif"]
+          },
+          borderRadius: {
+            "DEFAULT": "0.25rem",
+            "lg": "0.5rem",
+            "xl": "0.75rem",
+            "full": "9999px"
+          },
+        },
+      },
+    }
+  </script>
+</head>
+<body class="bg-background-light dark:bg-background-dark font-display">
+<div class="flex h-screen">
+<!-- SideNavBar -->
+<aside class="w-64 flex-shrink-0 bg-white dark:bg-background-dark shadow-md">
+<div class="flex h-full flex-col justify-between p-4">
+<div class="flex flex-col gap-8">
+<div class="flex items-center gap-3 px-3">
+<div class="bg-primary text-white rounded-lg p-2">
+<span class="material-symbols-outlined" style="font-size: 24px;">flag</span>
+</div>
+<h1 class="text-[#111418] dark:text-white text-xl font-bold">Reportes</h1>
+</div>
+<div class="flex flex-col gap-2">
+<a class="flex items-center gap-3 px-3 py-2 rounded-lg text-[#111418] dark:text-white" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+<p class="text-sm font-medium">Dashboard</p>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 rounded-lg bg-primary/10 text-primary" href="#">
+<span class="material-symbols-outlined">list_alt</span>
+<p class="text-sm font-medium">Reportes</p>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 rounded-lg text-[#111418] dark:text-white" href="#">
+<span class="material-symbols-outlined">analytics</span>
+<p class="text-sm font-medium">Analytics</p>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 rounded-lg text-[#111418] dark:text-white" href="#">
+<span class="material-symbols-outlined">settings</span>
+<p class="text-sm font-medium">Configuración</p>
+</a>
+</div>
+</div>
+<div class="flex flex-col gap-4">
+<button class="flex w-full cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 px-4 bg-primary text-white text-sm font-bold">
+<span>Nuevo Reporte</span>
+</button>
+<div class="flex flex-col gap-1 border-t dark:border-gray-700 pt-4">
+<a class="flex items-center gap-3 px-3 py-2 rounded-lg text-[#111418] dark:text-white" href="#">
+<span class="material-symbols-outlined">help</span>
+<p class="text-sm font-medium">Ayuda</p>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 rounded-lg text-[#111418] dark:text-white" href="#">
+<span class="material-symbols-outlined">logout</span>
+<p class="text-sm font-medium">Cerrar Sesión</p>
+</a>
+</div>
+</div>
+</div>
+</aside>
+<!-- Main Content -->
+<main class="flex-1 overflow-y-auto p-8">
+<div class="max-w-7xl mx-auto">
+<!-- Header -->
+<div class="flex flex-wrap justify-between items-center gap-4 mb-6">
+<p class="text-[#111418] dark:text-white text-4xl font-black leading-tight tracking-[-0.033em]">Detalles del Reporte #12345</p>
+<div class="flex items-center gap-4">
+<div class="flex h-8 shrink-0 items-center justify-center gap-x-2 rounded-lg bg-[#FD7E14]/20 px-3">
+<p class="text-[#FD7E14] text-sm font-medium leading-normal">En progreso</p>
+</div>
+<div class="flex gap-2">
+<button class="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 px-4 bg-primary text-white text-sm font-bold">
+<span class="truncate">Cambiar Estado</span>
+</button>
+<button class="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 px-4 bg-white dark:bg-gray-700 text-[#111418] dark:text-white text-sm font-bold border border-gray-300 dark:border-gray-600">
+<span class="truncate">Añadir Nota</span>
+</button>
+</div>
+</div>
+</div>
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+<!-- Left Column -->
+<div class="lg:col-span-2 flex flex-col gap-8">
+<!-- Information Panel -->
+<div class="bg-white dark:bg-gray-800 rounded-xl shadow p-6">
+<h2 class="text-lg font-bold text-[#111418] dark:text-white mb-4">Información del Reporte</h2>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-4">
+<div class="flex flex-col gap-1">
+<p class="text-[#617589] dark:text-gray-400 text-sm font-normal">Tipo de Falla</p>
+<p class="text-[#111418] dark:text-white text-sm font-medium">Fuga de agua</p>
+</div>
+<div class="flex flex-col gap-1">
+<p class="text-[#617589] dark:text-gray-400 text-sm font-normal">Ubicación</p>
+<p class="text-[#111418] dark:text-white text-sm font-medium">Av. Siempre Viva 742, Springfield</p>
+</div>
+<div class="flex flex-col gap-1">
+<p class="text-[#617589] dark:text-gray-400 text-sm font-normal">Fecha de Reporte</p>
+<p class="text-[#111418] dark:text-white text-sm font-medium">26/10/2023</p>
+</div>
+<div class="flex flex-col gap-1">
+<p class="text-[#617589] dark:text-gray-400 text-sm font-normal">Reportado por</p>
+<p class="text-[#111418] dark:text-white text-sm font-medium">Homero Simpson</p>
+</div>
+</div>
+</div>
+<!-- Evidence Gallery -->
+<div class="bg-white dark:bg-gray-800 rounded-xl shadow p-6">
+<h2 class="text-lg font-bold text-[#111418] dark:text-white mb-4">Evidencia Adjunta</h2>
+<div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
+<div class="aspect-square bg-center bg-no-repeat bg-cover rounded-lg" data-alt="Fuga de agua en la calle" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuAOlSiuv3dM9y0Ze1XHMWJic0_8eZBTeO7fJPhdREvVjnJWMpGj_MUgdtkrHxZ_ZoBq0hENHr_H4YslzGMLm8Q3vFER1A7Y5jJDj0snTQmv2mbe8nQiEZT67NKBdu_0rAlpmMoZXnuzg3mphE9CpQEG-iQjlYVjXWrxIdmWLy7VS1TYs6ZoC5Lf0jadPn8-hwuvZP7iaEY922o2KYWtdSpLqZ4hFrf0-58BkotXe2j3CEeJcD57kh6x4LLAmWU6I8GtM7A5q9rHbGo");'></div>
+<div class="aspect-square bg-center bg-no-repeat bg-cover rounded-lg" data-alt="Poste de luz dañado" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuDyrTTlCUSEOy2ECI-EMCI6OvhJ1eJf2FmGMue0ip2YzX37DJFNdcsqKTr7QHnp3YLip1GyNynY2T5DTK_UzHnHPdF9ZNZw3P0hu3UuAHfHw-rJk4EG_1oIh1d0sflK3HFJ40nOxtERQyS-GLVLuCKUHMZPbo6Ylh0DplAYt7kyYCqm_hsOncOgmiPh3JPh0KwOi9F__CdEPh8NTRMKevSVfDAiJnOdd6XwMewDQdTiBFfz3Ei2MqiFWrap27vsgcU4yDDfHdgXHUo");'></div>
+<div class="aspect-square bg-gray-200 dark:bg-gray-700 rounded-lg flex items-center justify-center">
+<span class="material-symbols-outlined text-gray-500" style="font-size: 48px;">videocam</span>
+</div>
+</div>
+</div>
+<!-- Comments Section -->
+<div class="bg-white dark:bg-gray-800 rounded-xl shadow p-6">
+<h2 class="text-lg font-bold text-[#111418] dark:text-white mb-4">Comentarios</h2>
+<div class="space-y-4">
+<div class="flex gap-4">
+<div class="w-10 h-10 rounded-full bg-cover bg-center" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuC3fdWV9lJnvxhWlRvfhNZWQEN0Ho_6yi93uBfTemfkL_mO05HcBTYaF9aGllnBpR1ICWmLIjW-8K1zaDA5N9kd9jDA2_5wUsIMstv0HwDIXtECrrjSI3jzsu-0RFzKqutXvjAAxwDxRpBki-NbbS9boIBaOQC0M-DLFY1X81O_q0c2jf0tVVjqXnU-SKi-Vqr7YAWD7yNKYZIFu1XVsAU57U0Zv_ivY-jXaqj5MGcW2sJt-W_lRPxWySp_Bb9k6JoNEfdPnlLmldQ')"></div>
+<div class="flex-1">
+<p class="text-[#111418] dark:text-white font-semibold">Homero Simpson <span class="text-gray-500 dark:text-gray-400 font-normal text-sm ml-2">26/10/2023</span></p>
+<p class="text-gray-700 dark:text-gray-300 mt-1">Hay una fuga enorme en la esquina de mi casa. ¡Mi césped se está inundando!</p>
+</div>
+</div>
+<div class="flex gap-4">
+<div class="w-10 h-10 rounded-full bg-cover bg-center" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuC3fdWV9lJnvxhWlRvfhNZWQEN0Ho_6yi93uBfTemfkL_mO05HcBTYaF9aGllnBpR1ICWmLIjW-8K1zaDA5N9kd9jDA2_5wUsIMstv0HwDIXtECrrjSI3jzsu-0RFzKqutXvjAAxwDxRpBki-NbbS9boIBaOQC0M-DLFY1X81O_q0c2jf0tVVjqXnU-SKi-Vqr7YAWD7yNKYZIFu1XVsAU57U0Zv_ivY-jXaqj5MGcW2sJt-W_lRPxWySp_Bb9k6JoNEfdPnlLmldQ')"></div>
+<div class="flex-1">
+<p class="text-[#111418] dark:text-white font-semibold">Agente Flanders <span class="text-gray-500 dark:text-gray-400 font-normal text-sm ml-2">27/10/2023</span></p>
+<p class="text-gray-700 dark:text-gray-300 mt-1">Recibido, vecinillo. Se ha asignado un equipo para su revisión.</p>
+</div>
+</div>
+</div>
+<div class="mt-6">
+<textarea class="w-full rounded-lg border-gray-300 dark:border-gray-600 bg-gray-50 dark:bg-gray-700 p-3 text-sm text-[#111418] dark:text-white" placeholder="Añadir un comentario..." rows="3"></textarea>
+<button class="mt-2 flex min-w-[84px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 px-4 bg-primary text-white text-sm font-bold">
+<span>Enviar Comentario</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Right Column -->
+<div class="lg:col-span-1 flex flex-col gap-8">
+<!-- History Log -->
+<div class="bg-white dark:bg-gray-800 rounded-xl shadow p-6">
+<h2 class="text-lg font-bold text-[#111418] dark:text-white mb-4">Historial de Cambios</h2>
+<ul class="space-y-4">
+<li class="flex items-start gap-3">
+<div class="w-6 h-6 bg-green-500/20 rounded-full flex items-center justify-center mt-1 flex-shrink-0">
+<span class="material-symbols-outlined text-green-600" style="font-size: 16px;">check_circle</span>
+</div>
+<div>
+<p class="text-sm text-[#111418] dark:text-white">Estado cambiado a <span class="font-semibold text-green-600">Resuelto</span></p>
+<p class="text-xs text-gray-500 dark:text-gray-400">por Agente Skinner - 28/10/2023 11:45 AM</p>
+</div>
+</li>
+<li class="flex items-start gap-3">
+<div class="w-6 h-6 bg-[#FD7E14]/20 rounded-full flex items-center justify-center mt-1 flex-shrink-0">
+<span class="material-symbols-outlined text-[#FD7E14]" style="font-size: 16px;">sync</span>
+</div>
+<div>
+<p class="text-sm text-[#111418] dark:text-white">Estado cambiado a <span class="font-semibold text-[#FD7E14]">En progreso</span></p>
+<p class="text-xs text-gray-500 dark:text-gray-400">por Agente Flanders - 27/10/2023 09:00 AM</p>
+</div>
+</li>
+<li class="flex items-start gap-3">
+<div class="w-6 h-6 bg-blue-500/20 rounded-full flex items-center justify-center mt-1 flex-shrink-0">
+<span class="material-symbols-outlined text-blue-600" style="font-size: 16px;">fiber_new</span>
+</div>
+<div>
+<p class="text-sm text-[#111418] dark:text-white">Reporte creado</p>
+<p class="text-xs text-gray-500 dark:text-gray-400">por Homero Simpson - 26/10/2023 08:30 PM</p>
+</div>
+</li>
+</ul>
+</div>
+<!-- Notes Section -->
+<div class="bg-white dark:bg-gray-800 rounded-xl shadow p-6">
+<h2 class="text-lg font-bold text-[#111418] dark:text-white mb-4">Notas Internas</h2>
+<div class="space-y-4">
+<div class="bg-yellow-100/50 dark:bg-yellow-800/20 p-3 rounded-lg">
+<p class="text-sm text-yellow-800 dark:text-yellow-200">Equipo de reparación notificó que la pieza necesaria llegará mañana. - A. Flanders</p>
+<p class="text-xs text-yellow-600 dark:text-yellow-400 mt-1">27/10/2023</p>
+</div>
+</div>
+<div class="mt-6">
+<textarea class="w-full rounded-lg border-gray-300 dark:border-gray-600 bg-gray-50 dark:bg-gray-700 p-3 text-sm text-[#111418] dark:text-white" placeholder="Añadir una nota interna..." rows="3"></textarea>
+<button class="mt-2 flex min-w-[84px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 px-4 bg-gray-200 dark:bg-gray-700 text-[#111418] dark:text-white text-sm font-bold">
+<span>Guardar Nota</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+</div>
+</body></html>

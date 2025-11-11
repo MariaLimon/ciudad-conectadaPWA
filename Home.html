@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html class="light" lang="es">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Panel de Autoridades - Reportes</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;500;700;900&amp;display=swap"
+        rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
+    <script>
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#1173d4",
+                        "background-light": "#f6f7f8",
+                        "background-dark": "#101922",
+                    },
+                    fontFamily: {
+                        "display": ["Public Sans"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+</head>
+
+<body class="bg-background-light dark:bg-background-dark font-display">
+    <div class="relative flex h-auto min-h-screen w-full flex-col group/design-root overflow-x-hidden">
+        <div class="layout-container flex h-full grow flex-col">
+            <header
+                class="flex items-center justify-between whitespace-nowrap border-b border-solid border-b-[#f0f2f4] dark:border-b-background-dark/50 px-10 py-3 bg-white dark:bg-background-dark/20">
+                <div class="flex items-center gap-4 text-slate-800 dark:text-white">
+                    <div class="size-8 text-primary">
+                        <svg fill="none" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+                            <path
+                                d="M36.7273 44C33.9891 44 31.6043 39.8386 30.3636 33.69C29.123 39.8386 26.7382 44 24 44C21.2618 44 18.877 39.8386 17.6364 33.69C16.3957 39.8386 14.0109 44 11.2727 44C7.25611 44 4 35.0457 4 24C4 12.9543 7.25611 4 11.2727 4C14.0109 4 16.3957 8.16144 17.6364 14.31C18.877 8.16144 21.2618 4 24 4C26.7382 4 29.123 8.16144 30.3636 14.31C31.6043 8.16144 33.9891 4 36.7273 4C40.7439 4 44 12.9543 44 24C44 35.0457 40.7439 44 36.7273 44Z"
+                                fill="currentColor"></path>
+                        </svg>
+                    </div>
+                    <h2 class="text-slate-800 dark:text-white text-lg font-bold leading-tight tracking-[-0.015em]">Panel
+                        de Autoridad</h2>
+                </div>
+                <div class="flex flex-1 justify-end gap-4 items-center">
+                    <button
+                        class="flex items-center justify-center rounded-lg h-10 bg-transparent text-slate-600 dark:text-slate-300 gap-2 text-sm font-bold min-w-0 px-2.5 hover:bg-slate-100 dark:hover:bg-background-dark/50">
+                        <span class="material-symbols-outlined">notifications</span>
+                    </button>
+                    <div class="bg-center bg-no-repeat aspect-square bg-cover rounded-full size-10"
+                        data-alt="User profile picture"
+                        style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuBESsN5vd9oZhybu_T-beLvt5SwukytfH8bppjgPQ-BOYZawvOATdQqa0WyuqNEIUtq3hDnOFkw4FCk8j1IZ9mBYBY4ay4vjRh9AZ5vULUDnqgB2WxWrmarEbpVjAhXZ96d1Cjfosz_FnMlqVGxKk3OfO-OByEo1O_X4nC2uIGnAsul28FEQnsfLRXmU67YYEVx0N0g1p--at1F8gRA06JFujd_GdO-LwTmIbzh0VwiITN5HW6ptpSmvrSkBCDD4OIH41iHh0Lgf-E");'>
+                    </div>
+                </div>
+            </header>
+            <main class="px-4 sm:px-6 lg:px-10 py-8">
+                <div class="max-w-7xl mx-auto">
+                    <div class="flex flex-wrap justify-between items-center gap-4 mb-6">
+                        <div class="flex flex-col gap-1">
+                            <p
+                                class="text-slate-900 dark:text-white text-4xl font-black leading-tight tracking-[-0.033em]">
+                                Reportes de Agua Potable</p>
+                            <p class="text-slate-500 dark:text-slate-400 text-base font-normal">Bienvenido, Autoridad de
+                                Agua. Aquí están los reportes que requieren su atención.</p>
+                        </div>
+                    </div>
+                    <div class="flex flex-col md:flex-row gap-4 mb-6">
+                        <div class="flex-1">
+                            <label class="flex flex-col min-w-40 h-12 w-full">
+                                <div class="flex w-full flex-1 items-stretch rounded-lg h-full">
+                                    <div
+                                        class="text-slate-400 dark:text-slate-500 flex border border-r-0 border-slate-200 dark:border-slate-700 bg-white dark:bg-background-dark items-center justify-center pl-4 rounded-l-lg">
+                                        <span class="material-symbols-outlined">search</span>
+                                    </div>
+                                    <input
+                                        class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-r-lg text-slate-800 dark:text-white focus:outline-0 focus:ring-2 focus:ring-primary border-slate-200 dark:border-slate-700 bg-white dark:bg-background-dark h-full placeholder:text-slate-400 dark:placeholder-slate-500 px-4 pl-2 text-base font-normal leading-normal"
+                                        placeholder="Buscar por palabra clave..." value="" />
+                                </div>
+                            </label>
+                        </div>
+                        <div class="flex gap-3">
+                            <button
+                                class="flex h-12 shrink-0 items-center justify-center gap-x-2 rounded-lg bg-white dark:bg-background-dark border border-slate-200 dark:border-slate-700 px-4 hover:bg-slate-50 dark:hover:bg-background-dark/50">
+                                <span
+                                    class="material-symbols-outlined text-slate-500 dark:text-slate-400">filter_list</span>
+                                <p class="text-slate-800 dark:text-white text-sm font-medium leading-normal">Estado</p>
+                                <span
+                                    class="material-symbols-outlined text-slate-500 dark:text-slate-400">expand_more</span>
+                            </button>
+                            <button
+                                class="flex h-12 shrink-0 items-center justify-center gap-x-2 rounded-lg bg-white dark:bg-background-dark border border-slate-200 dark:border-slate-700 px-4 hover:bg-slate-50 dark:hover:bg-background-dark/50 cursor-not-allowed opacity-50">
+                                <p class="text-slate-800 dark:text-white text-sm font-medium leading-normal">Tipo: Agua
+                                </p>
+                                <span class="material-symbols-outlined text-slate-500 dark:text-slate-400">lock</span>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="overflow-x-auto">
+                        <div
+                            class="rounded-lg border border-slate-200 dark:border-slate-700 bg-white dark:bg-background-dark/30 shadow-sm">
+                            <table class="w-full text-left">
+                                <thead>
+                                    <tr class="bg-slate-50 dark:bg-background-dark/50">
+                                        <th
+                                            class="px-6 py-4 text-left text-xs font-medium text-slate-500 dark:text-slate-400 uppercase tracking-wider">
+                                            Tipo de Falla</th>
+                                        <th
+                                            class="px-6 py-4 text-left text-xs font-medium text-slate-500 dark:text-slate-400 uppercase tracking-wider">
+                                            Ubicación</th>
+                                        <th
+                                            class="px-6 py-4 text-left text-xs font-medium text-slate-500 dark:text-slate-400 uppercase tracking-wider">
+                                            Estado</th>
+                                        <th
+                                            class="px-6 py-4 text-left text-xs font-medium text-slate-500 dark:text-slate-400 uppercase tracking-wider">
+                                            Fecha</th>
+                                        <th
+                                            class="px-6 py-4 text-left text-xs font-medium text-slate-500 dark:text-slate-400 uppercase tracking-wider">
+                                            Acción</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="divide-y divide-slate-200 dark:divide-slate-700">
+                                    <tr class="hover:bg-slate-50 dark:hover:bg-background-dark/50">
+                                        <td
+                                            class="px-6 py-4 whitespace-nowrap text-sm font-medium text-slate-900 dark:text-white flex items-center gap-3">
+                                            <span class="material-symbols-outlined text-blue-500">water_drop</span> Fuga
+                                            de Agua
+                                        </td>
+                                        <td
+                                            class="px-6 py-4 whitespace-nowrap text-sm text-slate-500 dark:text-slate-400">
+                                            Av. Principal 123, Colonia Centro</td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm">
+                                            <span
+                                                class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-red-100 text-red-800 dark:bg-red-900/50 dark:text-red-300">Pendiente</span>
+                                        </td>
+                                        <td
+                                            class="px-6 py-4 whitespace-nowrap text-sm text-slate-500 dark:text-slate-400">
+                                            24/10/2023</td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
+                                            <a class="text-primary hover:text-primary/80 dark:text-primary/90 dark:hover:text-primary"
+                                                href="#">Ver Detalles</a>
+                                        </td>
+                                    </tr>
+                                    <tr class="hover:bg-slate-50 dark:hover:bg-background-dark/50">
+                                        <td
+                                            class="px-6 py-4 whitespace-nowrap text-sm font-medium text-slate-900 dark:text-white flex items-center gap-3">
+                                            <span class="material-symbols-outlined text-blue-500">water_drop</span> Baja
+                                            presión de agua
+                                        </td>
+                                        <td
+                                            class="px-6 py-4 whitespace-nowrap text-sm text-slate-500 dark:text-slate-400">
+                                            Calle Roble 45, Bosques del Sur</td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm">
+                                            <span
+                                                class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-yellow-100 text-yellow-800 dark:bg-yellow-900/50 dark:text-yellow-300">En
+                                                Progreso</span>
+                                        </td>
+                                        <td
+                                            class="px-6 py-4 whitespace-nowrap text-sm text-slate-500 dark:text-slate-400">
+                                            23/10/2023</td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
+                                            <a class="text-primary hover:text-primary/80 dark:text-primary/90 dark:hover:text-primary"
+                                                href="#">Ver Detalles</a>
+                                        </td>
+                                    </tr>
+                                    <tr class="hover:bg-slate-50 dark:hover:bg-background-dark/50">
+                                        <td
+                                            class="px-6 py-4 whitespace-nowrap text-sm font-medium text-slate-900 dark:text-white flex items-center gap-3">
+                                            <span class="material-symbols-outlined text-blue-500">water_drop</span>
+                                            Tubería rota
+                                        </td>
+                                        <td
+                                            class="px-6 py-4 whitespace-nowrap text-sm text-slate-500 dark:text-slate-400">
+                                            Blvd. de los Héroes 789, San Miguel</td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm">
+                                            <span
+                                                class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800 dark:bg-green-900/50 dark:text-green-300">Resuelto</span>
+                                        </td>
+                                        <td
+                                            class="px-6 py-4 whitespace-nowrap text-sm text-slate-500 dark:text-slate-400">
+                                            22/10/2023</td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
+                                            <a class="text-primary hover:text-primary/80 dark:text-primary/90 dark:hover:text-primary"
+                                                href="#">Ver Detalles</a>
+                                        </td>
+                                    </tr>
+                                    <tr class="hover:bg-slate-50 dark:hover:bg-background-dark/50">
+                                        <td
+                                            class="px-6 py-4 whitespace-nowrap text-sm font-medium text-slate-900 dark:text-white flex items-center gap-3">
+                                            <span class="material-symbols-outlined text-blue-500">water_drop</span> Agua
+                                            contaminada
+                                        </td>
+                                        <td
+                                            class="px-6 py-4 whitespace-nowrap text-sm text-slate-500 dark:text-slate-400">
+                                            Calle Luna 23, Jardines del Sol</td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm">
+                                            <span
+                                                class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-red-100 text-red-800 dark:bg-red-900/50 dark:text-red-300">Pendiente</span>
+                                        </td>
+                                        <td
+                                            class="px-6 py-4 whitespace-nowrap text-sm text-slate-500 dark:text-slate-400">
+                                            21/10/2023</td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
+                                            <a class="text-primary hover:text-primary/80 dark:text-primary/90 dark:hover:text-primary"
+                                                href="#">Ver Detalles</a>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="flex items-center justify-between mt-6">
+                        <p class="text-sm text-slate-500 dark:text-slate-400">Mostrando 1-4 de 15 reportes</p>
+                        <div class="flex gap-1">
+                            <button
+                                class="flex items-center justify-center h-8 w-8 rounded-md bg-white dark:bg-background-dark/30 border border-slate-200 dark:border-slate-700 text-slate-500 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-background-dark/50 disabled:opacity-50"
+                                disabled="">
+                                <span class="material-symbols-outlined text-base">chevron_left</span>
+                            </button>
+                            <button
+                                class="flex items-center justify-center h-8 w-8 rounded-md bg-primary text-white border border-primary">1</button>
+                            <button
+                                class="flex items-center justify-center h-8 w-8 rounded-md bg-white dark:bg-background-dark/30 border border-slate-200 dark:border-slate-700 text-slate-500 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-background-dark/50">2</button>
+                            <button
+                                class="flex items-center justify-center h-8 w-8 rounded-md bg-white dark:bg-background-dark/30 border border-slate-200 dark:border-slate-700 text-slate-500 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-background-dark/50">
+                                <span class="material-symbols-outlined text-base">chevron_right</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+
+</body>
+
+</html>
