@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="utf-8" />
+  <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+  <title>Crear Cuenta - Ciudad Conectada</title>
+  <link rel="stylesheet" href="app.css">
+  <link rel="manifest" href="manifest.webmanifest">
+</head>
+
+<body class="login-page">
+  <div class="login-container">
+    <form class="login-form" id="register-form"> <!-- La acción redirige al Login -->
+      <h2 class="login-form__title">Crear Cuenta</h2>
+      <div class="login-form__group">
+        <input type="text" id="name" class="login-form__input" placeholder="Nombre" required>
+      </div>
+      <div class="login-form__group">
+        <input type="text" id="lastName" class="login-form__input" placeholder="Apellido" required>
+      </div>
+      <div class="login-form__group">
+        <input type="email" id="email" class="login-form__input" placeholder="Correo electrónico" required>
+      </div>
+      <div class="login-form__group">
+        <input type="password" id="password" class="login-form__input" placeholder="Contraseña" required>
+      </div>
+      <div class="login-form__group">
+        <input type="password" id="confirmPassword" class="login-form__input" placeholder="Confirmar Contraseña"
+          required>
+      </div>
+      <div class="login-form__group">
+        <select id="rol" class="login-form__input" required>
+          <option value="" disabled selected>Selecciona un rol</option>
+          <option value="Inspector de agua">Inspector de agua</option>
+          <option value="Inspector de luz">Inspector de luz</option>
+          <option value="Inspector de infraestructura">Inspector de infraestructura</option>
+        </select>
+      </div>
+
+      <button type="submit" class="login-form__button">Registrarse</button>
+      <a href="login.html" class="login-form__link">¿Ya tienes una cuenta? Inicia Sesión</a>
+    </form>
+  </div>
+  <script src="app.js"></script>
+</body>
+
+</html>

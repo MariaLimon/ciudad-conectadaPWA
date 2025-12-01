@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="es" class="light">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Notificaciones - Ciudad Conectada</title>
+    <link rel="stylesheet" href="app.css">
+    <link rel="manifest" href="manifest.webmanifest">
+</head>
+
+<body>
+    <div class="main-layout">
+        <!-- SideNavBar -->
+        <aside id="sidebar" class="sidebar">
+            <div class="sidebar__content">
+                <div>
+                    <div class="sidebar__header">
+                        <div class="sidebar__logo">
+                            <span class="material-symbols-outlined">flag</span>
+                        </div>
+                        <h1 class="sidebar__title">Reportes</h1>
+                    </div>
+                    <nav class="flex flex-col gap-2 mt-8">
+                        <a class="sidebar__nav-link" href="Home.html">
+                            <span class="material-symbols-outlined">home</span>
+                            <p>Home</p>
+                        </a>
+                        <a class="sidebar__nav-link" href="Notificaciones.html">
+                            <span class="material-symbols-outlined">notifications</span>
+                            <p>Notificaciones</p>
+                        </a>
+                        <a class="sidebar__nav-link" href="Perfil.html">
+                            <span class="material-symbols-outlined">account_circle</span>
+                            <p>Mi Perfil</p>
+                        </a>
+                    </nav>
+                </div>
+                <div class="sidebar__footer">
+                    <nav class="flex flex-col gap-1 mt-4">
+                        <a class="sidebar__nav-link" href="#">
+                            <span class="material-symbols-outlined">help</span>
+                            <p>Ayuda</p>
+                        </a>
+                        <a class="sidebar__nav-link" href="login.html">
+                            <span class="material-symbols-outlined">logout</span>
+                            <p>Cerrar Sesión</p>
+                        </a>
+                    </nav>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <div class="container">
+                <!-- Header actualizado sin la campana -->
+                <header class="main-header">
+                    <button id="menu-toggle" class="menu-toggle">
+                        <span class="material-symbols-outlined">menu</span>
+                    </button>
+                    <h2 class="main-header__title">Notificaciones del Sistema</h2>
+                    <a href="Perfil.html" class="main-header__user-profile"
+                        style="background-image: url('https://i.pravatar.cc/150?u=a042581f4e29026704d');"
+                        title="Mi Perfil"></a>
+                </header>
+
+                <!-- Page Content con notificaciones de nuevo reporte -->
+                <div class="notification-page">
+                    <div class="notification-list">
+                        <!-- Notificación de Nuevo Reporte -->
+                        <div class="notification-item notification-item--unread">
+                            <div class="notification__icon">
+                                <span class="material-symbols-outlined">add_task</span>
+                            </div>
+                            <div class="notification__content">
+                                <h3 class="notification__title">Nuevo Reporte Recibido</h3>
+                                <p class="notification__message">Se ha creado el reporte #12348: "Fuga de agua en calle
+                                    principal".</p>
+                                <p class="notification__timestamp">Hace 2 minutos</p>
+                            </div>
+                        </div>
+
+                        <!-- Notificación de Nuevo Reporte -->
+                        <div class="notification-item notification-item--unread">
+                            <div class="notification__icon">
+                                <span class="material-symbols-outlined">add_task</span>
+                            </div>
+                            <div class="notification__content">
+                                <h3 class="notification__title">Nuevo Reporte Recibido</h3>
+                                <p class="notification__message">Se ha creado el reporte #12347: "Baja presión en
+                                    colonia centro".</p>
+                                <p class="notification__timestamp">Hace 15 minutos</p>
+                            </div>
+                        </div>
+
+                        <!-- Notificación de Nuevo Reporte (Leída) -->
+                        <div class="notification-item">
+                            <div class="notification__icon">
+                                <span class="material-symbols-outlined">add_task</span>
+                            </div>
+                            <div class="notification__content">
+                                <h3 class="notification__title">Nuevo Reporte Recibido</h3>
+                                <p class="notification__message">Se ha creado el reporte #12346: "Tubería rota en Av.
+                                    Lázaro Cárdenas".</p>
+                                <p class="notification__timestamp">Hace 1 hora</p>
+                            </div>
+                        </div>
+
+                        <!-- Notificación de Nuevo Reporte (Leída) -->
+                        <div class="notification-item">
+                            <div class="notification__icon">
+                                <span class="material-symbols-outlined">add_task</span>
+                            </div>
+                            <div class="notification__content">
+                                <h3 class="notification__title">Nuevo Reporte Recibido</h3>
+                                <p class="notification__message">Se ha creado el reporte #12345: "Fuga de agua en Av.
+                                    Siempre Viva".</p>
+                                <p class="notification__timestamp">Ayer a las 5:30 PM</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Script para el menú responsivo -->
+    <script>
+        document.getElementById('menu-toggle').addEventListener('click', function () {
+            const sidebar = document.getElementById('sidebar');
+            sidebar.classList.toggle('sidebar--open');
+        });
+    </script>
+    <script src="app.js"></script>
+</body>
+
+</html>
