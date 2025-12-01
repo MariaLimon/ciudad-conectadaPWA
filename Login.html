@@ -1,58 +1,33 @@
-<html>
+<!DOCTYPE html>
+<html lang="es">
 
 <head>
-  <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin="" />
-  <link rel="stylesheet" as="style" onload="this.rel='stylesheet'"
-    href="https://fonts.googleapis.com/css2?display=swap&amp;family=Noto+Sans%3Awght%40400%3B500%3B700%3B900&amp;family=Public+Sans%3Awght%40400%3B500%3B700%3B900" />
-
-  <title>Ciudad Conectada Autoridades</title>
-  <link rel="icon" type="image/x-icon" href="data:image/x-icon;base64," />
-
-  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  <meta charset="utf-8" />
+  <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+  <title>Iniciar Sesión - Ciudad Conectada</title>
+  <link rel="stylesheet" href="app.css">
+  <link rel="manifest" href="manifest.webmanifest">
 </head>
 
-<body>
-  <div
-    class="relative flex h-auto min-h-screen w-full flex-col bg-slate-50 justify-between group/design-root overflow-x-hidden"
-    style='font-family: "Public Sans", "Noto Sans", sans-serif;'>
-    <div>
-      <div class="flex items-center bg-slate-50 p-4 pb-2 justify-between">
-        <h2 class="text-[#0c151d] text-lg font-bold leading-tight tracking-[-0.015em] flex-1 text-center pl-12 pr-12">
-          Iniciar Sesión</h2>
+<body class="login-page">
+  <div class="login-container">
+    <form class="login-form" id="login-form">
+      <h2 class="login-form__title">Iniciar Sesión</h2>
+
+      <div class="login-form__group">
+        <input id="email" type="email" class="login-form__input" placeholder="Correo electrónico" required>
       </div>
-      <div class="flex max-w-[480px] flex-wrap items-end gap-4 px-4 py-3">
-        <label class="flex flex-col min-w-40 flex-1">
-          <input placeholder="Correo electrónico"
-            class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg text-[#0c151d] focus:outline-0 focus:ring-0 border-none bg-[#e6edf4] focus:border-none h-14 placeholder:text-[#4574a1] p-4 text-base font-normal leading-normal"
-            value="" />
-        </label>
+
+      <div class="login-form__group">
+        <input id="password" type="password" class="login-form__input" placeholder="Contraseña" required>
       </div>
-      <div class="flex max-w-[480px] flex-wrap items-end gap-4 px-4 py-3">
-        <label class="flex flex-col min-w-40 flex-1">
-          <input placeholder="Contraseña"
-            class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg text-[#0c151d] focus:outline-0 focus:ring-0 border-none bg-[#e6edf4] focus:border-none h-14 placeholder:text-[#4574a1] p-4 text-base font-normal leading-normal"
-            value="" />
-        </label>
-      </div>
-      <div class="flex px-4 py-3">
-        <button
-          class="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-12 px-5 flex-1 bg-[#359dff] text-[#0c151d] text-base font-bold leading-normal tracking-[0.015em]">
-          <span class="truncate">Iniciar Sesión</span>
-        </button>
-      </div>
-      <p class="text-[#4574a1] text-sm font-normal leading-normal pb-3 pt-1 px-4 text-center underline">¿Olvidaste tu
-        contraseña?</p>
-      <p class="text-[#4574a1] text-sm font-normal leading-normal pb-3 pt-1 px-4 text-center underline">Crear una cuenta
-      </p>
-    </div>
-    <div>
-      <div
-        class="w-full bg-center bg-no-repeat aspect-square bg-cover rounded-none group-[:not(.dark)]/design-root:hidden"
-        style='background-image: url("/dark.svg"); aspect-ratio: 390 / 320;'></div>
-      <div class="w-full bg-center bg-no-repeat aspect-square bg-cover rounded-none group-[.dark]/design-root:hidden"
-        style='background-image: url("/light.svg"); aspect-ratio: 390 / 320;'></div>
-    </div>
+
+      <button type="submit" class="login-form__button">Iniciar Sesión</button>
+      <a href="#" class="login-form__link">¿Olvidaste tu contraseña?</a>
+      <a href="RegistrarUsuario.html" class="login-form__link">Crear una cuenta</a>
+    </form>
   </div>
+  <script src="app.js"></script>
 </body>
 
 </html>

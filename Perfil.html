@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="es" class="light">
+
+<head>
+  <meta charset="utf-8" />
+  <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+  <title>Mi Perfil - Ciudad Conectada</title>
+  <link rel="stylesheet" href="app.css">
+  <link rel="manifest" href="manifest.webmanifest">
+</head>
+
+<body>
+  <div class="main-layout">
+    <!-- SideNavBar -->
+    <aside class="sidebar">
+      <div class="sidebar__content">
+        <div>
+          <div class="sidebar__header">
+            <div class="sidebar__logo">
+              <span class="material-symbols-outlined">flag</span>
+            </div>
+            <h1 class="sidebar__title">Reportes</h1>
+          </div>
+          <nav class="flex flex-col gap-2 mt-8">
+            <a class="sidebar__nav-link" href="Home.html">
+              <span class="material-symbols-outlined">home</span>
+              <p>Home</p>
+            </a>
+            <a class="sidebar__nav-link" href="Notificaciones.html">
+              <span class="material-symbols-outlined">notifications</span>
+              <p>Notificaciones</p>
+            </a>
+            <a class="sidebar__nav-link" href="Perfil.html">
+              <span class="material-symbols-outlined">account_circle</span>
+              <p>Mi Perfil</p>
+            </a>
+          </nav>
+        </div>
+        <div class="sidebar__footer">
+          <nav class="flex flex-col gap-1 mt-4">
+            <a class="sidebar__nav-link" href="#">
+              <span class="material-symbols-outlined">help</span>
+              <p>Ayuda</p>
+            </a>
+            <a class="sidebar__nav-link" href="login.html">
+              <span class="material-symbols-outlined">logout</span>
+              <p>Cerrar Sesión</p>
+            </a>
+          </nav>
+        </div>
+      </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content">
+      <div class="container">
+        <div class="profile-page">
+          <header class="profile-header">
+            <div id="profile-avatar" class="profile-avatar"
+              style="background-image: url('');"></div>
+            <div class="profile-info">
+              <h1 id="profile-name">—</h1>
+              <p id="profile-email">—</p>
+              <p id="profile-rol">—</p>  
+            </div>
+          </header>
+
+          <div class="profile-content">
+            <section class="profile-card">
+              <h2>Estadísticas</h2>
+              <div class="profile-stats">
+                <div class="profile-stat"><span id="stat-attended" class="profile-stat__number">0</span><span
+                    class="profile-stat__label">Reportes Atendidos</span></div>
+                <div class="profile-stat"><span id="stat-month" class="profile-stat__number">0</span><span
+                    class="profile-stat__label">Este Mes</span></div>
+                <div class="profile-stat"><span id="stat-rate" class="profile-stat__number">0%</span><span
+                    class="profile-stat__label">Tasa de Resolución</span></div>
+              </div>
+            </section>
+
+
+            <section class="profile-card">
+              <h2>Información de la Cuenta</h2>
+              <form id="profile-form" class="profile-form">
+                <div class="profile-form__group">
+                  <label for="name" class="profile-form__label">Nombre</label>
+                  <input type="text" id="name" name="name" class="profile-form__input" value=""disabled>
+                </div>
+                <div class="profile-form__group">
+                  <label for="lastName" class="profile-form__label">Apellido</label>
+                  <input type="text" id="lastName" name="lastName" class="profile-form__input" value=""disabled>
+                </div>
+                <div class="profile-form__group">
+                  <label for="email" class="profile-form__label">Correo Electrónico</label>
+                  <input type="email" id="email" name="email" class="profile-form__input" value=""disabled>
+                </div>
+                <div class="profile-form__group">
+                  <label for="rol" class="profile-form__label">Rol</label>
+                  <input type="text" id="rol" name="rol" class="profile-form__input" value="" disabled>
+                </div>
+                <!-- <div class="flex gap-2 mt-4">
+                  <button type="submit" id="save-profile-button" class="button button--primary">Guardar Cambios</button>
+                  <button type="button" id="cancel-profile-button" class="button">Cancelar</button>
+                </div> -->
+              </form>
+            </section>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+  <script src="app.js"></script>
+</body>
+
+</html>
