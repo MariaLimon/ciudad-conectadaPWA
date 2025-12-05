@@ -2,15 +2,15 @@
   "name": "Ciudad Conectada - Autoridades",
   "short_name": "Reportes",
   "description": "Aplicación para gestionar reportes de servicios en la ciudad.",
-  "start_url": "/Home.html",
+  "start_url": "/",
   "display": "standalone",
   "background_color": "#F0F2F5",
   "theme_color": "#005A9C",
   "orientation": "portrait-primary",
   "scope": "/",
   "icons": [{
-        "src":"Logo_CiudadConectada.jpg",
-        "sizes":"1024x1024",
-        "type":"image/jpg"
+        "src":"icons/icono_144x144.png",
+        "sizes":"144x144",
+        "type":"image/png"
     }]
 }

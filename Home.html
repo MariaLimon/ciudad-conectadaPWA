@@ -10,6 +10,7 @@
 </head>
 
 <body>
+  <div id="status-message" class="offline"></div>
   <div class="main-layout">
     <!-- SideNavBar -->
     <aside class="sidebar">
@@ -42,7 +43,7 @@
               <span class="material-symbols-outlined">help</span>
               <p>Ayuda</p>
             </a>
-            <a class="sidebar__nav-link" href="login.html">
+            <a class="sidebar__nav-link" href="login.html" data-logout>
               <span class="material-symbols-outlined">logout</span>
               <p>Cerrar Sesión</p>
             </a>
@@ -71,6 +72,7 @@
               atención.</p>
           </div>
 
+          <!--
           <div class="dashboard-filters">
             <div class="dashboard-filters__search">
               <span class="material-symbols-outlined dashboard-filters__search-icon">search</span>
@@ -85,6 +87,28 @@
               <p>Tipo: Agua</p>
               <span class="material-symbols-outlined">lock</span>
             </button>
+          </div>
+          -->
+          <div class="dashboard-filters">
+            <div class="dashboard-filters__search">
+              <span class="material-symbols-outlined dashboard-filters__search-icon">search</span>
+              <input id="search-input" type="text" class="dashboard-filters__search-input"
+                placeholder="Buscar por palabra clave...">
+            </div>
+
+            <button class="dashboard-filters__button" id="filter-status-btn">
+              <span class="material-symbols-outlined">filter_list</span>
+              <p>Estado</p>
+              <span class="material-symbols-outlined">expand_more</span>
+            </button>
+
+            <!-- Menú desplegable -->
+            <div class="filter-dropdown" id="filter-status-dropdown" style="display:none;">
+              <div class="filter-dropdown__item">Todos</div>
+              <div class="filter-dropdown__item">Enviado</div>
+              <div class="filter-dropdown__item">En Progreso</div>
+              <div class="filter-dropdown__item">Resuelto</div>
+            </div>
           </div>
 
           <div class="overflow-x-auto">

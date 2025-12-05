@@ -1,10 +1,6 @@
-/**
- * Objeto principal de la aplicación 'Ciudad Conectada'.
- * Maneja la autenticación con JWT, llamadas a la API, sincronización offline y la lógica de la UI.
- */
 window.App = {
   // --- CONFIGURACIÓN ---
-  apiBaseUrl: "https://apiciudadconectada.somee.com/api",
+  apiBaseUrl: "https://ciudad-conectada.onrender.com/api",
   currentUser: null,
 
   // --- INICIALIZACIÓN ---
@@ -12,20 +8,30 @@ window.App = {
    * Registra el Service Worker, restaura la sesión del usuario y configura la lógica de la página actual.
    */
   init() {
+    // Registrar Service Worker
     this.registerSW();
+
+    // Restaurar sesión del usuario si existe
     this.restoreCurrentUser();
+
+    // Configurar eventos globales (formularios, botones, etc.)
     this.setupEventListeners();
+
+    // Cargar lógica según la página actual
     this.setupPageSpecificLogic();
 
-    // Escuchar mensajes del Service Worker para sincronización
+    this.setupOnlineOfflineBanner();
+
+
+    // Escuchar mensajes del Service Worker para sincronización en background
     if ("serviceWorker" in navigator) {
       navigator.serviceWorker.addEventListener("message", (event) => {
+
         if (event.data && event.data.type === "SYNC_NOW") {
-          console.log(
-            "Mensaje del SW recibido, procesando cola de sincronización..."
-          );
+          console.log("Mensaje del SW recibido → Procesando cola de sincronización…");
           this.processSyncQueue();
         }
+
       });
     }
   },
@@ -42,38 +48,38 @@ window.App = {
     }
   },
 
-  
-async login(email, password) {
-  try {
-    const response = await this.apiCall("/auth/login", {
-      method: "POST",
-      body: { email, password },
-    });
 
-    // La API ya devuelve token + user ✔
-    if (response.token && response.user) {
+  async login(email, password) {
+    try {
+      const response = await this.apiCall("/auth/login", {
+        method: "POST",
+        body: { email, password },
+      });
 
-      // Guardamos token + datos del usuario
-      localStorage.setItem("authToken", response.token);
-      localStorage.setItem("currentUser", JSON.stringify(response.user));
-      this.currentUser = response.user;
+      // La API ya devuelve token + user ✔
+      if (response.token && response.user) {
 
-      this.showMessage("Inicio de sesión exitoso ✔", 2500);
+        // Guardamos token + datos del usuario
+        localStorage.setItem("authToken", response.token);
+        localStorage.setItem("currentUser", JSON.stringify(response.user));
+        this.currentUser = response.user;
 
-      // Redirigir a Home
-      setTimeout(() => window.location.href = "Home.html", 1000);
-      return true;
+        this.showMessage("Inicio de sesión exitoso ✔", 2500);
+
+        // Redirigir a Home
+        setTimeout(() => window.location.href = "Home.html", 1000);
+        return true;
+      }
+
+      this.showMessage("Error: Falta token o usuario en respuesta.", 3500);
+      return false;
+
+    } catch (error) {
+      console.error("Error en login:", error);
+      this.showMessage("Credenciales incorrectas", 3000);
+      return false;
     }
-
-    this.showMessage("Error: Falta token o usuario en respuesta.", 3500);
-    return false;
-
-  } catch (error) {
-    console.error("Error en login:", error);
-    this.showMessage("Credenciales incorrectas ❌", 3000);
-    return false;
-  }
-},
+  },
 
 
   /**
@@ -113,12 +119,16 @@ async login(email, password) {
   /**
    * Cierra la sesión del usuario y lo redirige a la página de login.
    */
-logout() {
-  localStorage.removeItem("authToken");
-  localStorage.removeItem("currentUser");
-  this.currentUser = null;
-  window.location.href = "Login.html";
-},
+  logout() {
+    // Elimina solamente datos de sesión (mejor que clear())
+    localStorage.removeItem("authToken");
+    localStorage.removeItem("currentUser");
+
+    this.currentUser = null;
+
+    // Evita usar redirección que pueda fallar offline
+    window.location.href = "Login.html";
+  },
 
   // --- COMUNICACIÓN CON LA API ---
   /**
@@ -253,12 +263,11 @@ logout() {
     });
 
     document.addEventListener("click", (e) => {
-      if (
-        e.target.id === "change-status-button" ||
-        e.target.closest("#change-status-button")
-      ) {
+      const btn = e.target.closest("#change-status-button");
+      if (btn) {
         this.handleStatusChange();
       }
+
       if (e.target.matches("[data-logout]")) {
         e.preventDefault();
         this.logout();
@@ -267,23 +276,23 @@ logout() {
   },
 
   checkAuthStatus() {
-  const token = localStorage.getItem("authToken");
-  const path = window.location.pathname;
+    const token = localStorage.getItem("authToken");
+    const path = window.location.pathname;
 
-  // Si NO hay token → enviarlo al login
-  if (!token && !path.includes("Login.html") && !path.includes("RegistrarUsuario.html")) {
-    window.location.href = "Login.html";
-    return false;
-  }
+    // Si NO hay token → enviarlo al login
+    if (!token && !path.includes("Login.html") && !path.includes("RegistrarUsuario.html")) {
+      window.location.href = "Login.html";
+      return false;
+    }
 
-  // Si YA hay token → evitar ir a login
-  if (token && (path.includes("Login.html") || path.includes("RegistrarUsuario.html"))) {
-    window.location.href = "Home.html";
-    return false;
-  }
+    // Si YA hay token → evitar ir a login
+    if (token && (path.includes("Login.html") || path.includes("RegistrarUsuario.html"))) {
+      window.location.href = "Home.html";
+      return false;
+    }
 
-  return true;
-},
+    return true;
+  },
 
   /**
    * Configura la lógica específica para la página actual.
@@ -343,21 +352,21 @@ logout() {
   },
 
   // --- FUNCIONES DE RENDERIZADO ---
-async loadReports() {
-  try {
-    const reports = await this.apiCall("/Reports");
-    const tableBody = document.getElementById("reports-table-body");
-    if (!tableBody) return;
+  async loadReports() {
+    try {
+      const reports = await this.apiCall("/Reports");
+      const tableBody = document.getElementById("reports-table-body");
+      if (!tableBody) return;
 
-    tableBody.innerHTML = "";
+      tableBody.innerHTML = "";
 
-    reports.forEach((report) => {
-      const tipoServicio = report.service?.type || "Sin servicio";
+      reports.forEach((report) => {
+        const tipoServicio = report.service?.type || "Sin servicio";
 
-      const row = document.createElement("tr");
-      row.className = "reports-table__body-row";
+        const row = document.createElement("tr");
+        row.className = "reports-table__body-row";
 
-      row.innerHTML = `
+        row.innerHTML = `
         <td class="reports-table__cell reports-table__cell--type">
           <span class="material-symbols-outlined text-blue-500">
             ${this.getIconForType(tipoServicio)}
@@ -384,158 +393,236 @@ async loadReports() {
         </td>
       `;
 
-      tableBody.appendChild(row);
-    });
+        tableBody.appendChild(row);
+      });
 
-  } catch (error) {
-    console.error("Error al cargar reportes:", error);
-  }
-},
+    } catch (error) {
+      console.error("Error al cargar reportes:", error);
+    }
+  },
+
+  // ---- Cargar evidencias del reporte ----
+  async loadReportEvidence(reportId) {
+    try {
+      // Llamada correcta al endpoint de tu API
+      const response = await this.apiCall(`/Reports/${reportId}/evidencias`);
+
+      const evidencias = response.evidencias || [];
+
+      const gallery = document.getElementById("evidence-gallery");
+      if (!gallery) return;
+
+      gallery.innerHTML = "";
+
+      if (evidencias.length === 0) {
+        gallery.innerHTML = "<p>No hay evidencias adjuntas.</p>";
+        return;
+      }
+
+      evidencias.forEach(url => {
+        // Construcción del enlace completo para Render
+        const fullUrl = `https://ciudad-conectada.onrender.com${url}`;
+
+        const img = document.createElement("img");
+        img.src = fullUrl;
+        img.alt = "Evidencia";
+        img.classList.add("evidence-thumb");
+
+        gallery.appendChild(img);
+      });
+
+    } catch (error) {
+      console.error("Error cargando evidencias:", error);
+    }
+  },
 
   async loadReportDetails() {
-  const reportId = new URLSearchParams(window.location.search).get("id");
-  if (!reportId) return;
+    const reportId = new URLSearchParams(window.location.search).get("id");
+    if (!reportId) return;
 
-  try {
-    const report = await this.apiCall(`/Reports/${reportId}`);
-    if (!report) return;
+    try {
+      const report = await this.apiCall(`/Reports/${reportId}`);
+      if (!report) return;
 
-    const tipoServicio = report.service?.type || "Sin servicio";
+      const tipoServicio = report.service?.type || "Sin servicio";
 
-    this.setElementText(
-      "report-title",
-      report.service ? `${report.service.type || ""}`.trim() : "-"
-    );
-    this.setElementText("report-details-status", report.estado);
-    this.setElementText("report-title", tipoServicio); 
-    this.setElementText("report-location", report.location || "-");
-    this.setElementText(
-      "report-date",
-      report.createdAt ? new Date(report.createdAt).toLocaleDateString() : "-"
-    );
-    this.setElementText(
-      "report-user",
-      report.user ? `${report.user.name} ${report.user.lastName || ""}`.trim() : "-"
-    );
-    this.setElementText("report-description", report.description || "-");
+      this.setElementText(
+        "report-title",
+        report.service ? `${report.service.type || ""}`.trim() : "-"
+      );
+      this.setElementText("report-details-status", report.estado);
+      this.setElementText("report-title", tipoServicio);
+      this.setElementText("report-location", report.location || "-");
+      this.setElementText(
+        "report-date",
+        report.createdAt ? new Date(report.createdAt).toLocaleDateString() : "-"
+      );
+      this.setElementText(
+        "report-user",
+        report.user ? `${report.user.name} ${report.user.lastName || ""}`.trim() : "-"
+      );
 
-  } catch (error) {
-    console.error("Error al cargar detalles del reporte:", error);
-  }
-},
+      this.loadReportEvidence(reportId);
 
-getIconForType(type) {
-  if (!type) return "help";
+      this.setElementText("report-description", report.description || "-");
 
-  const t = type.toLowerCase();
+    } catch (error) {
+      console.error("Error al cargar detalles del reporte:", error);
+    }
+  },
 
-  if (t.includes("agua")) return "water_drop";
-  if (t.includes("luz")) return "bolt";
-  if (t.includes("infra")) return "construction";
-
-  return "report";
-},
-
- /* // --- FUNCIONES DE NOTAS ---
-
- getAuthData() {
-  const user = JSON.parse(localStorage.getItem("currentUser"));
-  const token = localStorage.getItem("authToken");
-  return user ? { user, token } : null;
-},
-
-async handleNoteSubmit(event) {
-  event.preventDefault();
-
-  const reportId = new URLSearchParams(window.location.search).get("id");
-  const content = document.getElementById("note-text").value;
-
-  if (!content.trim()) {
-    this.showMessage("La nota no puede estar vacía.");
-    return;
-  }
-
-  const auth = this.getAuthData();
-  if (!auth || !auth.user) {
-    this.showMessage("No se encontró usuario autenticado.");
-    return;
-  }
-
-  try {
-    await this.apiCall(`/reports/${reportId}/notas`, {
-      method: "POST",
-      body: {
-        userId: auth.user.id,
-        description: content
-      }
-    });
-
-    this.showMessage("Nota agregada correctamente.");
-    document.getElementById("note-text").value = "";
-    this.loadNotes(reportId);
-
-  } catch (error) {
-    console.error("Error agregando nota:", error);
-    this.showMessage("Error al agregar la nota.");
-  }
-},
-
-async loadNotes(reportId) {
-  try {
-    const notas = await this.apiCall(`/reports/${reportId}/notas`);
-
-    const notesContainer = document.getElementById("notes-list");
-    if (!notesContainer) return;
-
-    notesContainer.innerHTML = "";
-
-    if (!notas || notas.length === 0) {
-      notesContainer.innerHTML = "<p class='no-notes'>No hay notas aún.</p>";
+  async handleStatusChange() {
+    const reportId = new URLSearchParams(window.location.search).get("id");
+    if (!reportId) {
+      this.showMessage("ID de reporte no encontrado.");
       return;
     }
 
-    notas.forEach(note => {
-      const div = document.createElement("div");
-      div.classList.add("note-item");
+    const currentStatus = document.getElementById("report-details-status").innerText;
 
-      div.innerHTML = `
-        <p class="note-text">${this.escapeHtml(note.description)}</p>
-        <span class="note-date">${new Date(note.createdAt).toLocaleString()}</span>
-      `;
+    const nextStatus =
+      currentStatus === "Enviado" ? "En Progreso" :
+        currentStatus === "En Progreso" ? "Resuelto" : "Resuelto";
 
-      notesContainer.appendChild(div);
-    });
+    // Si NO hay internet → guardar en cola
+    if (!navigator.onLine) {
+      this.enqueueSyncAction({
+        url: `/Reports/${reportId}/estado`,
+        method: "PUT",
+        body: { estado: nextStatus }
+      });
 
-  } catch (error) {
-    console.error("Error al cargar notas:", error);
-  }
-},
- */
+      document.getElementById("report-details-status").innerText = nextStatus;
+
+      this.showMessage("Estado guardado offline ✔ Se sincronizará cuando vuelva el internet.");
+      return;
+    }
+
+    // Si hay internet → hacer la petición normal
+    try {
+      await this.apiCall(`/Reports/${reportId}/estado`, {
+        method: "PUT",
+        body: { estado: nextStatus }
+      });
+
+      this.showMessage("Estado actualizado ✔");
+
+      document.getElementById("report-details-status").innerText = nextStatus;
+
+    } catch (error) {
+      console.error("Error actualizando estado:", error);
+      this.showMessage("Error al cambiar estado");
+    }
+  },
+
+
+
+  getIconForType(type) {
+    if (!type) return "help";
+
+    const t = type.toLowerCase();
+
+    if (t.includes("agua")) return "water_drop";
+    if (t.includes("luz")) return "bolt";
+    if (t.includes("infra")) return "construction";
+
+    return "report";
+  },
+
+  /* // --- FUNCIONES DE NOTAS ---
+ 
+  getAuthData() {
+   const user = JSON.parse(localStorage.getItem("currentUser"));
+   const token = localStorage.getItem("authToken");
+   return user ? { user, token } : null;
+ },
+ 
+ async handleNoteSubmit(event) {
+   event.preventDefault();
+ 
+   const reportId = new URLSearchParams(window.location.search).get("id");
+   const content = document.getElementById("note-text").value;
+ 
+   if (!content.trim()) {
+     this.showMessage("La nota no puede estar vacía.");
+     return;
+   }
+ 
+   const auth = this.getAuthData();
+   if (!auth || !auth.user) {
+     this.showMessage("No se encontró usuario autenticado.");
+     return;
+   }
+ 
+   try {
+     await this.apiCall(`/reports/${reportId}/notas`, {
+       method: "POST",
+       body: {
+         userId: auth.user.id,
+         description: content
+       }
+     });
+ 
+     this.showMessage("Nota agregada correctamente.");
+     document.getElementById("note-text").value = "";
+     this.loadNotes(reportId);
+ 
+   } catch (error) {
+     console.error("Error agregando nota:", error);
+     this.showMessage("Error al agregar la nota.");
+   }
+ },
+ 
+ async loadNotes(reportId) {
+   try {
+     const notas = await this.apiCall(`/reports/${reportId}/notas`);
+ 
+     const notesContainer = document.getElementById("notes-list");
+     if (!notesContainer) return;
+ 
+     notesContainer.innerHTML = "";
+ 
+     if (!notas || notas.length === 0) {
+       notesContainer.innerHTML = "<p class='no-notes'>No hay notas aún.</p>";
+       return;
+     }
+ 
+     notas.forEach(note => {
+       const div = document.createElement("div");
+       div.classList.add("note-item");
+ 
+       div.innerHTML = `
+         <p class="note-text">${this.escapeHtml(note.description)}</p>
+         <span class="note-date">${new Date(note.createdAt).toLocaleString()}</span>
+       `;
+ 
+       notesContainer.appendChild(div);
+     });
+ 
+   } catch (error) {
+     console.error("Error al cargar notas:", error);
+   }
+ },
+  */
 
   loadProfile() {
     if (!this.currentUser) return;
     const fullname =
-      `${this.currentUser.name || ""} ${
-        this.currentUser.lastName || ""
-      }`.trim() || "Usuario";
+      `${this.currentUser.name || ""} ${this.currentUser.lastName || ""
+        }`.trim() || "Usuario";
     this.setElementText("profile-name", fullname);
     this.setElementText("profile-email", this.currentUser.email || "");
-    this.setElementText("profile-rol", this.currentUser.rol ||"");
+    this.setElementText("profile-rol", this.currentUser.rol || "");
     this.setElementValue("name", this.currentUser.name || "");
     this.setElementValue("lastName", this.currentUser.lastName || "");
     this.setElementValue("email", this.currentUser.email || "");
-    this.setElementValue("rol",this.currentUser.rol || "")
+    this.setElementValue("rol", this.currentUser.rol || "")
   },
 
   loadNotifications() {
     // Aquí iría la lógica para cargar notificaciones desde localStorage o la API
     console.log("Cargando notificaciones...");
   },
-
-
-
-
-
 
 
   // --- FUNCIONES AUXILIARES ---
@@ -581,6 +668,32 @@ async loadNotes(reportId) {
     });
   },
 
+  setupOnlineOfflineBanner() {
+  const statusMessage = document.getElementById("status-message");
+
+  const updateOnlineStatus = () => {
+    if (navigator.onLine) {
+      statusMessage.classList.remove("offline");
+      statusMessage.textContent = "";
+
+      // Cuando regresa internet, lanza sincronización
+      console.log("Conexión restaurada → procesando cola…");
+      this.processSyncQueue();
+
+    } else {
+      statusMessage.classList.add("offline");
+      statusMessage.textContent = "Sin conexión a internet";
+      console.log("Modo offline activo");
+    }
+  };
+
+  window.addEventListener("online", updateOnlineStatus);
+  window.addEventListener("offline", updateOnlineStatus);
+
+  updateOnlineStatus(); // estado inicial
+},
+
+
   getStatusClass(estado) {
     switch (estado) {
       case "Resuelto":
@@ -605,9 +718,65 @@ async loadNotes(reportId) {
         });
     }
   },
+
+  
 };
 
 // Inicializar la aplicación cuando el DOM esté listo
 document.addEventListener("DOMContentLoaded", () => {
   App.init();
+});
+
+document.addEventListener("DOMContentLoaded", () => {
+
+  const searchInput = document.getElementById("search-input");
+  const filterStatusBtn = document.getElementById("filter-status-btn");
+  const filterStatusDropdown = document.getElementById("filter-status-dropdown");
+
+  let currentStatus = "";
+  let currentKeyword = "";
+
+  // Si NO existe el buscador, significa que NO estamos en Home.html
+  if (!searchInput || !filterStatusBtn || !filterStatusDropdown) return;
+
+  // Abrir / cerrar menú
+  filterStatusBtn.addEventListener("click", () => {
+    filterStatusDropdown.style.display =
+      filterStatusDropdown.style.display === "none" ? "block" : "none";
+  });
+
+  // Selección del estado
+  filterStatusDropdown.addEventListener("click", (e) => {
+    const status = e.target.innerText.trim();
+    currentStatus = status === "Todos" ? "" : status;
+    filterStatusDropdown.style.display = "none";
+    filterReports();
+  });
+
+  // Buscar por texto
+  searchInput.addEventListener("input", (e) => {
+    currentKeyword = e.target.value.toLowerCase();
+    filterReports();
+  });
+
+  function filterReports() {
+    const rows = document.querySelectorAll("#reports-table-body tr");
+
+    rows.forEach(row => {
+
+      const type = row.children[0].innerText.toLowerCase();
+      const location = row.children[1].innerText.toLowerCase();
+      const status = row.children[2].innerText;
+
+      const matchesKeyword =
+        type.includes(currentKeyword) ||
+        location.includes(currentKeyword);
+
+      const matchesStatus =
+        currentStatus === "" || status === currentStatus;
+
+      row.style.display = (matchesKeyword && matchesStatus) ? "" : "none";
+    });
+  }
+
 });
